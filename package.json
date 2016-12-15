@@ -1,0 +1,23 @@
+{
+  "name": "coffee-utils",
+  "version": "1.0.0",
+  "description": "Coffee-Utils contains utils that help you better convert coffeescripts to javascripts.",
+  "main": "coffee2js.js",
+  "dependencies": {
+    "line-reader": "^0.4.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/souparno/coffee-to-js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/souparno/coffee-to-js/issues"
+  },
+  "homepage": "https://github.com/souparno/coffee-to-js#readme"
+}
