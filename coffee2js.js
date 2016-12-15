@@ -95,23 +95,22 @@ function compilefile(p, outfile){
 					dst2 += line;
 					dst2 += os.EOL;
 						
-					//skip the next 2 empty lines
-					line = lines[++i];
-					line = line.trim();
-					if (line.length==0){
-						line = lines[++i];
-						line = line.trim();
-						if (line.length==0){
-							continue;
-						}
-					}
-					continue;
+					/*//skip the next 2 empty lines*/
+					//line = lines[++i];
+					//line = line.trim();
+					//if (line.length==0){
+						//line = lines[++i];
+						//line = line.trim();
+						//if (line.length==0){
+							//continue;
+						//}
+					//}
+					/*continue;*/
 				}
 				dst2 += line;
 				dst2 += os.EOL;
 			}
 			fs.writeFile(outfile, dst2);
-                        //if(cb) cb();
 		}
 	});
 }
@@ -153,7 +152,8 @@ function main(){
              var cwd = sh.pwd();
              var compile_dir = args[1];
              var output_dir = cwd.stdout + "/" + args[3];
-             
+            //console.log(output_dir);
+            //fs.emptydir(output_dir); 
              walk(compile_dir, function (err, results) {
                if(err) throw err;
 
@@ -163,8 +163,9 @@ function main(){
                  var outputfile = dir.substr(dir.lastIndexOf("/"));
                  dir = dir.substr(0, dir.lastIndexOf("/"));
                  output_file = dir + outputfile.substr(0, outputfile.lastIndexOf(".")) + ".js"; 
-console.log(output_file);
+                 //console.log(output_file);
                  mkdirp.sync(dir);
+                 console.log(output_file);
                  compilefile(val, output_file);
         });
              }); 
