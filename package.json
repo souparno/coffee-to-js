@@ -12,12 +12,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/souparno/coffee-to-js.git"
+    "url": "git+https://github.com/souparno/coffee-utils.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/souparno/coffee-to-js/issues"
+    "url": "https://github.com/souparno/coffee-utils/issues"
   },
-  "homepage": "https://github.com/souparno/coffee-to-js#readme"
+  "homepage": "https://github.com/souparno/coffee-utils#readme"
 }
