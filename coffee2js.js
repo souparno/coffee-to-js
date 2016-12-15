@@ -50,7 +50,7 @@ function compilefile(p){
 		if (!inblockcmts && line.indexOf('#') ===0 ){
 			debug('singleline comments, linenum='+linenum+',inblockcmts='+inblockcmts);
 			//oneline comments
-			line = line.replace('#', ' ');
+			line = line.replace('#', '');
 			line = '###' + line + '###';
 		}
 		src += line;
