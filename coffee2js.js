@@ -1,3 +1,5 @@
+var sh = require("shelljs");
+var mkdirp = require('mkdirp');
 var debug=require('debug')('coffee2jskeepcomments')
 	,fs=require('fs')
 	//,carrier = require('carrier')
@@ -17,14 +19,15 @@ carrier.carry(process.stdin, function(line) {
 
 function help(){
 	console.log('Usage: xxx file1.coffee file2.coffee');
+        console.log('Usage: xxx -c compile-dir -o output-dir');
 }
 
-function compilefile(p){
+function compilefile(p, outfile){
 
 	var inblockcmts=false;
 	
-	var outfile=path.dirname(p)+path.sep+path.basename(p,path.extname(p))+ '.js';
-	debug('outfile='+ outfile);
+	outfile = outfile || path.dirname(p)+path.sep+path.basename(p,path.extname(p))+ '.js';
+	//console.log('outfile='+ outfile);
 	//var fout=fs.createWriteStream(p);
 	var src='';
 	
@@ -108,19 +111,70 @@ function compilefile(p){
 				dst2 += os.EOL;
 			}
 			fs.writeFile(outfile, dst2);
+                        //if(cb) cb();
 		}
 	});
 }
 
+var walk = function(dir, done) {
+        var results = [];
+        fs.readdir(dir, function(err, list) {
+            if (err) return done(err);
+            var i = 0;
+            (function next() {
+                var file = list[i++];
+                if (!file) return done(null, results);
+                file = dir + '/' + file;
+                fs.stat(file, function(err, stat) {
+                    if (stat && stat.isDirectory()) {
+                        walk(file, function(err, res) {
+                            results = results.concat(res);
+                            next();
+                        });
+                    } else {
+                        results.push(file);
+                        next();
+                    }
+                });
+            })();
+        });
+    }
+
 function main(){
-	// print process.argv
-	//console.log(process.argv.length);
-	if (process.argv.length <=2){
+        var args = process.argv.slice(2);
+	if (!args.length){
 		help();
 		return;
 	}
 
-	process.argv.slice(2).forEach(function (val, index, array) {
+
+	if(args[0] == "-c") {
+           if(args[2] == "-o") {
+             var cwd = sh.pwd();
+             var compile_dir = args[1];
+             var output_dir = cwd.stdout + "/" + args[3];
+             
+             walk(compile_dir, function (err, results) {
+               if(err) throw err;
+
+
+         results.forEach(function (val, index, array) {
+                 var dir = output_dir + val.substr(compile_dir.length);
+                 var outputfile = dir.substr(dir.lastIndexOf("/"));
+                 dir = dir.substr(0, dir.lastIndexOf("/"));
+                 output_file = dir + outputfile.substr(0, outputfile.lastIndexOf(".")) + ".js"; 
+console.log(output_file);
+                 mkdirp.sync(dir);
+                 compilefile(val, output_file);
+        });
+             }); 
+             return;
+           }
+           help();
+           return;
+        }
+	
+	args.forEach(function (val, index, array) {
 		console.log('Compiling:'+ index + ': ' + val);
 		compilefile(val);
 	});
