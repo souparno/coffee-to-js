@@ -49,8 +49,7 @@ function compilefile(p, outfile){
 					debug('oneline block comments, linenum='+linenum+',inblockcmts='+inblockcmts);
 				}
 			}
-		} else
-		if (!inblockcmts && line.indexOf('#') ===0 ){
+		} else if (!inblockcmts && line.indexOf('#') ===0 ){
 			debug('singleline comments, linenum='+linenum+',inblockcmts='+inblockcmts);
 			//oneline comments
 			line = line.replace('#', '');
