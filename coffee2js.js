@@ -82,29 +82,13 @@ function compilefile(p, outfile){
 			var dst2='';
 			for (var i = 0; i < lines.length; i++){
 				line=lines[i];
-				//debug('line='+line);
 				var x=line.indexOf('/*');
 				var y=line.indexOf('*/');
-				//debug('x='+x+',y='+y);
 				if (x>=0 && y>0){
 					debug('single line comments at:'+i);
 					line = line.replace('/*', '//');
 					debug('****line='+line);
 					line =line.replace('*/', '');
-					dst2 += line;
-					dst2 += os.EOL;
-						
-					/*//skip the next 2 empty lines*/
-					//line = lines[++i];
-					//line = line.trim();
-					//if (line.length==0){
-						//line = lines[++i];
-						//line = line.trim();
-						//if (line.length==0){
-							//continue;
-						//}
-					//}
-					/*continue;*/
 				}
 				dst2 += line;
 				dst2 += os.EOL;
