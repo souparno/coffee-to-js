@@ -89,8 +89,7 @@ function compilefile(p, outfile){
 					debug('****line='+line);
 					line =line.replace('*/', '');
 				}
-				dst2 += line;
-				dst2 += os.EOL;
+				dst2 += line + "\n";
 			}
 			fs.writeFile(outfile, dst2);
 		}
