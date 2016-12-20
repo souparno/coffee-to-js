@@ -55,8 +55,7 @@ function compilefile(p, outfile){
 			line = line.replace('#', '');
 			line = '###' + line + '###';
 		}
-		src += line;
-		src += os.EOL;
+		src += line + "\n";
 				
 		if(last){
 			// or check if it's the last one
