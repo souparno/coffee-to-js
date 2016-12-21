@@ -22,7 +22,7 @@ function help(){
         console.log('Usage: xxx -c compile-dir -o output-dir');
 }
 
-function compilefile(p, outfile){
+function compilefile(p, outfile, cb){
 
 	var inblockcmts=false;
 	
@@ -91,7 +91,12 @@ function compilefile(p, outfile){
 				}
 				dst2 += line + "\n";
 			}
-			fs.writeFile(outfile, dst2);
+
+			fs.writeFile(outfile, dst2, function(err){
+                          if(err) console.log(err);
+
+                          if(cb) cb();
+                        });
 		}
 	});
 }
@@ -139,16 +144,26 @@ function main(){
                if(err) throw err;
 
 
-         results.forEach(function (val, index, array) {
+         var index = 0;
+         
+        (function rec() {
+                 var val = results[index++];
+                 if(index > results.length) return;
+                 var re = /(?:\.([^.]+))?$/;
+                 var ext = re.exec(val)[1];
                  var dir = output_dir + val.substr(compile_dir.length);
                  var outputfile = dir.substr(dir.lastIndexOf("/"));
                  dir = dir.substr(0, dir.lastIndexOf("/"));
                  output_file = dir + outputfile.substr(0, outputfile.lastIndexOf(".")) + ".js"; 
-                 //console.log(output_file);
-                 mkdirp.sync(dir);
-                 console.log(output_file);
-                 compilefile(val, output_file);
-        });
+
+                 if(ext == "coffee"){
+                   console.log(output_file + "  -- done");
+                   mkdirp.sync(dir);
+                   compilefile(val, output_file, rec);
+                 } else {
+                   rec();
+                 }
+         }());
              }); 
              return;
            }
