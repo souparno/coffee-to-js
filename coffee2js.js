@@ -156,11 +156,14 @@ function main(){
                  dir = dir.substr(0, dir.lastIndexOf("/"));
                  output_file = dir + outputfile.substr(0, outputfile.lastIndexOf(".")) + ".js"; 
 
+                 mkdirp.sync(dir);
                  if(ext == "coffee"){
                    console.log(output_file + "  -- done");
-                   mkdirp.sync(dir);
                    compilefile(val, output_file, rec);
                  } else {
+                   console.log(val + " copied from src dir");
+                   var src = fs.readFileSync(val).toString();
+                   fs.writeFileSync(output_file, src); 
                    rec();
                  }
          }());
