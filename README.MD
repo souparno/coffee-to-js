@@ -29,7 +29,7 @@ So, here is an alternative way which allows one to compile the coffeescript but 
 
 ## Install
 
-    $ npm install coffee-utils
+    $ npm install coffee-util
     
 ## Usage
 
