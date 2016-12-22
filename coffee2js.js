@@ -125,8 +125,8 @@ var walk = function(dir, done) {
         });
     }
 
-function main(){
-        var args = process.argv.slice(2);
+function main(args){
+        var args = args || process.argv.slice(2);
 	if (!args.length){
 		help();
 		return;
@@ -180,4 +180,8 @@ function main(){
 	});
 }
 
-main();
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = main;
+} else {
+  main();
+}
