@@ -64,7 +64,7 @@ function compilefile(p, outfile, cb){
 			
 			var dst='';
 			try {
-				dst=cs.compile(src);
+				dst=cs.compile(src, {bare: true});
 			} catch (e){
 				console.log(e);
 			}
