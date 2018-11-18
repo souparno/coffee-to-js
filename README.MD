@@ -11,9 +11,9 @@ However, not everybody prefer coffeescript syntax. Sometimes, one may prefer to 
 In those cases, lacking of the original source code may be useful,  as people said
 from 
 
-https://github.com/jashkenas/coffee-script/issues/2365
+https://github.com/souparno/coffee-util/issues
 
-"For this reason I'd find it useful to have certain single-line CoffeeScript comments appear as single-line JavaScript comments in the compiled output. Perhaps something like¡­"
+"For this reason I'd find it useful to have certain single-line CoffeeScript comments appear as single-line JavaScript comments in the compiled output. Perhaps something likeÂ¡Â­"
 
 "Please add single line comments to the compiled code. Even if you support some limited syntax of it its fully acceptable. Just support some easy common cases, thats it!
 
