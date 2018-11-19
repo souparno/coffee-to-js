@@ -1,6 +1,6 @@
 {
   "name": "coffee-util",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Coffee-Utils contains utils that help you better convert coffeescripts to javascripts.",
   "main": "coffee2js.js",
   "scripts": {
